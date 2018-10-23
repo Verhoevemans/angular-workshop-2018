@@ -1,0 +1,37 @@
+<h4>{{ ingredientIndex === null ? 'Add new' : 'Edit'}} ingredients</h4>
+<div class="form-group">
+  <div class="row">
+    <div class="col-xs-6">
+      <label>Ingredient name:</label>
+    </div>
+    <div class="col-xs-6">
+      <input type="text" class="form-control" [(ngModel)]="ingredientName">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-6">
+      <label>Ingredient amount:</label>
+    </div>
+    <div class="col-xs-6">
+      <input type="number" class="form-control" [(ngModel)]="ingredientAmount">
+    </div>
+  </div>
+  <br>
+  <div class="row" *ngIf="ingredientIndex === null">
+    <div class="col-xs-6 col-xs-offset-6">
+      <button class="btn btn-primary btn-block" type="button" (click)="addIngredient()" [disabled]="isDisabled()">Add ingredient</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="ingredientIndex !== null">
+    <div class="col-xs-6 col-xs-offset-6">
+      <button class="btn btn-primary btn-block" type="button"[disabled]="isDisabled()">Update ingredient</button>
+    </div>
+  </div>
+  <p>
+    (Opgegeven naam: {{ ingredientName }})
+  </p>
+  <p>
+    (Opgegeven aantal: {{ ingredientAmount }})
+  </p>
+</div>

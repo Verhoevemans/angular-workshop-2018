@@ -1,0 +1,8 @@
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let ingredient of ingredients; let i = index" (click)="editIngredient(i)">
+    {{ ingredient.name }} / {{ ingredient.amount }}
+  </li>
+</ul>
+<button class="btn btn-default btn-block" [routerLink]="['new']">
+  Add ingredient
+</button>
