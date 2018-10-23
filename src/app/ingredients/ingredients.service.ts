@@ -1,7 +1,7 @@
 import { Ingredient } from '../models/ingredient.model';
 import { Subject } from 'rxjs/index';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class IngredientsService {
@@ -34,7 +34,7 @@ export class IngredientsService {
     this.httpClient.put(
       'https://ordina-fontys-workshop.firebaseio.com/ingredients.json',
       this.ingredients
-    ).subscribe((ingredients: HttpEvent<any>) => {
+    ).subscribe((ingredients: Ingredient[]) => {
       this.ingredientsChanged.next(ingredients);
     })
   }
