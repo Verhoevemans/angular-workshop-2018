@@ -24,10 +24,14 @@
     </div>
   </div>
   <div class="row" *ngIf="ingredientIndex !== null">
-    <div class="col-xs-6 col-xs-offset-6">
-      <button class="btn btn-primary btn-block" type="button"[disabled]="isDisabled()">Update ingredient</button>
+    <div class="col-xs-6">
+      <button class="btn btn-default btn-block" type="button" [disabled]="isDisabled()" (click)="deleteIngredient()">Delete ingredient</button>
+    </div>
+    <div class="col-xs-6">
+      <button class="btn btn-primary btn-block" type="button" [disabled]="isDisabled()" (click)="updateIngredient()">Update ingredient</button>
     </div>
   </div>
+  <br>
   <p>
     (Opgegeven naam: {{ ingredientName }})
   </p>

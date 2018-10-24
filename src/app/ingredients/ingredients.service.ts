@@ -11,7 +11,7 @@ export class IngredientsService {
   constructor(private httpClient: HttpClient) {}
 
   getIngredient(index): Ingredient {
-    return this.ingredients.slice(index, index + 1)[0];
+    return this.ingredients ? this.ingredients.slice(index, index + 1)[0] : null;
   }
 
   getIngredients(): Ingredient[] {
@@ -20,7 +20,11 @@ export class IngredientsService {
     } else {
       this.httpClient.get<Ingredient[]>('https://ordina-fontys-workshop.firebaseio.com/ingredients.json')
         .subscribe((ingredients) => {
-          this.ingredients = ingredients;
+          if (ingredients) {
+            this.ingredients = ingredients;
+          } else {
+            this.ingredients = [];
+          }
           this.ingredientsChanged.next(this.ingredients.slice());
         });
 
@@ -36,6 +40,20 @@ export class IngredientsService {
       this.ingredients
     ).subscribe((ingredients: Ingredient[]) => {
       this.ingredientsChanged.next(ingredients);
-    })
+    });
+  }
+
+  updateIngredient(index, ingredient) {
+    if (ingredient) {
+      this.ingredients.splice(index, 1, ingredient);
+    } else {
+      this.ingredients.splice(index, 1);
+    }
+    this.httpClient.put(
+      'https://ordina-fontys-workshop.firebaseio.com/ingredients.json',
+      this.ingredients
+    ).subscribe((ingredients: Ingredient[]) => {
+      this.ingredientsChanged.next(ingredients);
+    });
   }
 }
